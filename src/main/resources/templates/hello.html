@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!-- th:text : 替换标签中的文字-->
+    <h1 th:text="${name}">Hello SpringBoot</h1>
+    <!-- th:属性 : 替换原属性的值-->
+    <span class="hello" th:class="demo" id="hello" th:id="demo"></span>
+    <input type="text" value="你好" th:value="世界">
+    <!-- th:if ：判断-->
+    <p th:if="${name != null}">welcome</p>
+    <!-- th:each : 循环-->
+    <p th:each="product:${products}" th:text="${product}"></p>
+    <ul>
+        <li th:each="product:${products}" th:text="${product}"></li>
+    </ul>
+</body>
+</html>

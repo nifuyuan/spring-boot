@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../static/favicon.ico" th:href="@{/favicon.ico}">
+
+    <title>Dashboard Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/dashboard.css" th:href="@{/css/dashboard.css}" rel="stylesheet">
+</head>
+
+<body>
+<div th:replace="_common :: navbar"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="_common :: sidebar(url='list')"></div>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <h2 class="pt-3 pb-3">商品列表</h2>
+            <a href="" th:href="@{/product}" class="btn btn-primary mb-3">添加商品</a>
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th align="center">ID</th>
+                        <th align="center">图片</th>
+                        <th align="center">名称</th>
+                        <th align="center">价格</th>
+                        <th align="center">库存</th>
+                        <th align="center">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="product:${products}">
+                            <td th:text="${product.id}">1,001</td>
+                            <td>
+                                <img th:src="${product.imgUrl}" width="60px" height="60px" alt="">
+                            </td>
+                            <td th:text="${product.name}">ipsum</td>
+                            <td th:text="${product.price}">dolor</td>
+                            <td th:text="${product.inventory}">sit</td>
+                            <td>
+                                <a href="" th:href="@{/product/}+${product.id}" class="btn btn-primary btn-sm">编辑</a>
+                                <button type="submit" onclick="deleteProduct(this)" class="btn btn-danger btn-sm">删除</button>
+                            </td>
+                        </tr>
+                        <!--<tr th:each="product:${products}">
+                            <td th:text="${product.id}">1,001</td>
+                            <td>Lorem</td>
+                            <td>ipsum</td>
+                            <td>dolor</td>
+                            <td>sit</td>
+                        </tr>-->
+                    </tbody>
+                </table>
+                <form id="deleteForm" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                </form>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!--<script src="../../assets/js/vendor/popper.min.js"></script>-->
+<script src="../static/js/jquery.min.js" th:src="@{/webjars/jquery/2.2.0/jquery.min.js}"></script>
+<script src="../static/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+
+<!-- Icons -->
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script>
+    feather.replace()
+    function deleteProduct(e) {
+        var url = $(e).prevAll("a").attr("href");
+        console.log(url);
+        $("#deleteForm").attr("action",url).submit();
+    }
+</script>
+</body>
+</html>

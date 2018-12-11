@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../static/favicon.ico" th:href="@{/favicon.ico}">
+
+    <title>Dashboard Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/dashboard.css" th:href="@{/css/dashboard.css}" rel="stylesheet">
+</head>
+
+<body>
+<div th:replace="_common :: navbar"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="_common :: sidebar(url='list')"></div>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <h2 class="pt-3 pb-3" th:text="${product != null} ? '编辑商品' : '添加商品'"></h2>
+            <form th:action="@{/product}" method="post">
+                <!--springboot自动将上面的post请求转换为put请求-->
+                <input th:if="${product != null}" type="hidden" name="_method" value="put">
+                <input th:if="${product != null}" type="hidden" name="id" th:value="${product.id}">
+                <div class="form-group">
+                    <label for="name">商品名</label>
+                    <input type="text" class="form-control" id="name" name="name" th:value="${product != null} ? ${product.name}" placeholder="商品名">
+                </div>
+                <div class="form-group">
+                    <label for="imgUrl">商品图片</label>
+                    <input type="text" class="form-control" id="imgUrl" name="imgUrl" th:value="${product != null} ? ${product.imgUrl}" placeholder="商品图片">
+                </div>
+                <div class="form-group">
+                    <label for="price">价格</label>
+                    <input type="number" step="0.01" class="form-control" id="price" name="price" th:value="${product != null} ? ${product.price}" placeholder="价格">
+                </div>
+                <div class="form-group">
+                    <label for="inventory">库存</label>
+                    <input type="number" class="form-control" id="inventory" name="inventory" th:value="${product != null} ? ${product.inventory}" placeholder="库存">
+                </div>
+                <button type="submit" class="btn btn-primary">提交</button>
+            </form>
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!--<script src="../../assets/js/vendor/popper.min.js"></script>-->
+<script src="../static/js/jquery.min.js" th:src="@{/webjars/jquery/2.2.0/jquery.min.js}"></script>
+<script src="../static/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+
+<!-- Icons -->
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script>
+    feather.replace()
+</script>
+</body>
+</html>

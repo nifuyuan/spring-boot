@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../static/favicon.ico" th:href="@{/favicon.ico}">
+
+    <title>Dashboard Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/dashboard.css" th:href="@{/css/dashboard.css}" rel="stylesheet">
+</head>
+
+<body>
+<div th:replace="_common :: navbar"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="_common :: sidebar(url='list')"></div>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <h2>[[${status}]]</h2>
+            <p>[[${timestamp}]]</p>
+            <p>[[${error}]]</p>
+            <p>[[${exception}]]</p>
+            <p>[[${message}]]</p>
+            <p>[[${path}]]</p>
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!--<script src="../../assets/js/vendor/popper.min.js"></script>-->
+<script src="../static/js/jquery.min.js" th:src="@{/webjars/jquery/2.2.0/jquery.min.js}"></script>
+<script src="../static/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+
+<!-- Icons -->
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script>
+    feather.replace()
+    function deleteProduct(e) {
+        var url = $(e).prevAll("a").attr("href");
+        console.log(url);
+        $("#deleteForm").attr("action",url).submit();
+    }
+</script>
+</body>
+</html>
